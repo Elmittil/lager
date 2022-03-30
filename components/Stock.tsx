@@ -1,6 +1,7 @@
 
-import { useState, useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { LondrinaSolid_100Thin } from '@expo-google-fonts/dev';
+import { useState, useEffect} from 'react';
+import { Text, View, StyleSheet, ScrollView } from 'react-native';
 import config from "../config/config.json";
 
 function StockList() {
@@ -12,20 +13,36 @@ function StockList() {
         .then(result => setProducts(result.data));
     }, []);
   
-    const list = products.map((product, index) => <Text key={index}>{ product.name } - { product.stock }</Text>);
+    const list = products.map((product, index) => <Text key={index} style={styles.listItem}>{ product.name } - { product.stock }</Text>);
   
     return (
-      <View>
+    <View>
         {list}
-      </View>
+    </View>
     );
   }
 
 export default function Stock() {
   return (
     <View>
-      <Text style={{color: '#333', fontSize: 24}}>Lagerförteckning</Text>
+      <Text style={styles.title}>Lagerförteckning</Text>
       <StockList/>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+    listItem: {
+      paddingBottom: 5,
+    },
+    title: {
+        textAlign: 'center',
+        color: '#333',
+        fontSize: 24,
+        marginBottom: 15,
+        textDecorationLine: 'underline'
+    },
+    scrollView: {
+        marginHorizontal: 15,
+    }
+});
