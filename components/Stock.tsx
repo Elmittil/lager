@@ -1,48 +1,41 @@
 
-import { LondrinaSolid_100Thin } from '@expo-google-fonts/dev';
-import { useState, useEffect} from 'react';
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import { useEffect} from 'react';
+import { Text, View, StyleSheet } from 'react-native';
 import config from "../config/config.json";
+import { Base, HomeStyles, Typography } from '../styles';
+import productModel from "../models/products.ts";
 
-function StockList() {
-    const [products, setProducts] = useState([]);
+
+function StockList({products, setProducts}) {
   
     useEffect(() => {
-      fetch(`${config.base_url}/products?api_key=${config.api_key}`)
-        .then(response => response.json())
-        .then(result => setProducts(result.data));
+        (async () => {
+            setProducts(await productModel.getProducts());
+        })();
     }, []);
   
-    const list = products.map((product, index) => <Text key={index} style={styles.listItem}>{ product.name } - { product.stock }</Text>);
+    const list = products.map((product, index) => {
+        return <Text
+                key={index}
+                style={Typography.list}>
+                    { product.name } - { product.stock }
+                </Text>
+    });
   
     return (
     <View>
         {list}
     </View>
+
     );
   }
 
-export default function Stock() {
+export default function Stock({products, setProducts}) {
   return (
     <View>
-      <Text style={styles.title}>Lagerförteckning</Text>
-      <StockList/>
+      <Text style={Typography.header3}>Lagerförteckning</Text>
+      <StockList products={products} setProducts={setProducts}/>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-    listItem: {
-      paddingBottom: 5,
-    },
-    title: {
-        textAlign: 'center',
-        color: '#333',
-        fontSize: 24,
-        marginBottom: 15,
-        textDecorationLine: 'underline'
-    },
-    scrollView: {
-        marginHorizontal: 15,
-    }
-});
