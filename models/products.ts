@@ -10,6 +10,7 @@ const products = {
         return result.data;
     },
     updateProduct: async function updateProduct(product: Partial<Product>) {
+        console.log(product);
         try {
             await fetch(`${config.base_url}/products`, {
                 body: JSON.stringify(product),
@@ -21,7 +22,6 @@ const products = {
         } catch (error) {
             console.error("could not update product " + error);
             return {
-                
                 error: error.message,
                 status: error.status,
             }

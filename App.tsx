@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Home from "./components/Home";
 import Pick from "./components/Pick";
+import Deliveries from "./components/Deliveries";
 import { useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
@@ -15,7 +16,8 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   const routeIcons = {
     "Stock": "home",
-    "Orders": "creditcard",
+    "Orders": "profile",
+    "Deliveries": "export",
   };
   const [products, setProducts] = useState([]);
   return (
@@ -23,7 +25,7 @@ export default function App() {
       <NavigationContainer>
         <Tab.Navigator screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
-              let iconName = routeIcons[route.name] || "alert";
+              let iconName = routeIcons[route.name] || "exclamation";
 
               return <AntDesign name={iconName} size={size} color={color} />;
             },
@@ -38,6 +40,9 @@ export default function App() {
           {/* <Tab.Screen name="Stock" component={Home} /> */}
           <Tab.Screen name="Orders">
             {() => <Pick setProducts={setProducts} />}
+          </Tab.Screen>
+          <Tab.Screen name="Deliveries">
+            {() => <Deliveries setProducts={setProducts} />}
           </Tab.Screen>
         </Tab.Navigator>
       </NavigationContainer>

@@ -14,11 +14,11 @@ const orders = {
         // orderrader som finns i ordern
         await Promise.all(order.order_items.map(async (order_item:
             Partial<OrderItem>) => {
-                let changedProduct = {
-                    id: order_item.product_id,
-                    name: order_item.name,
-                    stock: order_item.stock - order_item.amount,
-                    api_key: config.api_key,
+            let changedProduct = {
+                id: order_item.product_id,
+                name: order_item.name,
+                stock: order_item.stock - order_item.amount,
+                api_key: config.api_key,
             };
             await products.updateProduct(changedProduct);
        }));
@@ -43,14 +43,20 @@ const orders = {
                 },
                 method: 'PUT'
             });
-            // const result = await response.json();
-            // return result.data;
         } catch (error) {
-            console.error("could not update order");
+            console.error("could not update product " + error);
+            return {
+                
+                error: error.message,
+                status: error.status,
+            }
         }
     },
     checkProductsAvailability: function checkProductsAvailability(order: Partial<Order>) {
         let result = true;
+        if (order.order_items.length == 0){
+            result =  false;
+        }
         order.order_items.forEach(item => {
             if (item.amount > item.stock) {
                 result =  false;

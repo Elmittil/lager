@@ -12,7 +12,7 @@ export default function Home({products, setProducts}) {
     <SafeAreaView style={Base.container}>
         <Image source={tea} style={HomeStyles.image} />
         <View style={HomeStyles.titleOverlay}>
-            <Text style={[Typography.header1,Typography.center]}>
+            <Text style={[Typography.header1]}>
             TEAS IN STOCK</Text>
         </View>
         <ScrollView style={HomeStyles.scrollView}>

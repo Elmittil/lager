@@ -1,9 +1,8 @@
 
 import { useEffect} from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import config from "../config/config.json";
 import { Base, HomeStyles, Typography } from '../styles';
-import productModel from "../models/products.ts";
+import productModel from "../models/products";
 
 
 function StockList({products, setProducts}) {

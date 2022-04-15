@@ -1,8 +1,8 @@
 import { View, Text, Pressable } from "react-native";
-import orderModel from "../models/orders.ts";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState, useEffect } from 'react';
-import productModel from "../models/products.ts";
+import productModel from "../models/products";
+import orderModel from "../models/orders";
 import { Base, PickStyles, HomeStyles, Typography } from '../styles';
 
 
