@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Platform, ScrollView, View, Text, TextInput, Pressable } from 'react-native';
+import { useState } from 'react';
+import { ScrollView, Text, TextInput, Pressable } from 'react-native';
 
 import productModel from "../models/products";
 import deliveryModel from "../models/deliveries";
@@ -22,8 +22,7 @@ export default function DeliveryForm({ navigation, setProducts }) {
     async function addDelivery() {
         // skicka delivery till delivery model
         await deliveryModel.addDelivery(delivery);
-    
-        // öka antalet produkter i lagret för vald product
+                // öka antalet produkter i lagret för vald product
         const updatedProduct = {
             ...currentProduct,
             stock: (currentProduct.stock || 0) + (delivery.amount || 0),
@@ -32,6 +31,7 @@ export default function DeliveryForm({ navigation, setProducts }) {
         await productModel.updateProduct(updatedProduct);
     
         setProducts(await productModel.getProducts());
+        // setAllDelveries(await deliveryModel.getDeliveries());
     
         navigation.navigate("List", { reload: true });
     }    
@@ -40,7 +40,7 @@ export default function DeliveryForm({ navigation, setProducts }) {
         <ScrollView style={{ ...HomeStyles.base }}>
             <Text style={{ ...Typography.header2 }}>New delivery</Text>
 
-            <Text style={{ ...Typography.label }}>Produkt</Text>
+            <Text style={{ ...Typography.label }}>Product</Text>
             <ProductDropDown
                 delivery={delivery}
                 setDelivery={setDelivery}
@@ -52,11 +52,7 @@ export default function DeliveryForm({ navigation, setProducts }) {
             <TextInput
                     style={ FormStyles.input }
                     onChangeText={(content: string) => {
-                        // console.log("in on change");
                         setDelivery({ ...delivery, amount: parseInt(content)});
-                        // console.log(content);
-                        // console.log(delivery);
-
                     }}
                     value={delivery?.amount?.toString()}
                     keyboardType='numeric'
@@ -72,10 +68,7 @@ export default function DeliveryForm({ navigation, setProducts }) {
             <TextInput
                 style={ FormStyles.input }
                 onChangeText={(content: string) => {
-                    // console.log("in on change");
                     setDelivery({ ...delivery, comment: content});
-                    // console.log(content);
-                    // console.log(delivery);
                 }}
                 value={delivery?.comment}
             />
