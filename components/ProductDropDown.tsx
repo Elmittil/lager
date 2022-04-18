@@ -9,14 +9,22 @@ export default function ProductDropDown(props) {
     const [products, setProducts] = useState<Product[]>([]);
     let productsHash: any = {};
 
-    useEffect(async () => {
-        setProducts(await productModel.getProducts());
-    }, []);
-
     const itemsList = products.map((prod, index) => {
         productsHash[prod.id] = prod;
         return <Picker.Item key={index} label={prod.name} value={prod.id} />;
     });
+
+    function setDefaultProductValue(productsList: [Product]) {
+        props.setDelivery({ ...props.delivery, product_name: productsList[0].name });
+        props.setDelivery({ ...props.delivery, product_id: productsList[0].id });
+        props.setCurrentProduct(productsList[0]);
+    }
+
+    useEffect(async () => {
+        const productsList = await productModel.getProducts();
+        setProducts(productsList);
+        setDefaultProductValue(productsList);
+    }, []);
 
     return (
         <Picker

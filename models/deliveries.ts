@@ -3,11 +3,12 @@ import Delivery from '../interfaces/delivery';
 
 const deliveries = {
     addDelivery: async function addDelivery(deliveryData: Partial<Delivery>) {
+        let date = new Date();
         let delivery = {
             product_id: deliveryData.product_id,
             product_name: deliveryData.product_name,
             amount: deliveryData.amount,
-            delivery_date: deliveryData.delivery_date,
+            delivery_date: deliveryData.delivery_date || date.toLocaleDateString('se-SV'),
             comment: deliveryData.comment || "",
             api_key: config.api_key,
         };
