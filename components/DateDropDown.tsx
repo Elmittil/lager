@@ -9,7 +9,6 @@ import { Base, Typography } from '../styles';
 
 export default function DateDropDown(props) {
     const [dropDownDate, setDropDownDate] = useState(new Date());
-    // const [dropDownDate, setDropDownDate] = useState<Date>(new Date());
     const [show, setShow] = useState<Boolean>(false);
 
     const showDatePicker = () => {
@@ -26,19 +25,12 @@ export default function DateDropDown(props) {
             {(show || Platform.OS === "ios") && (
                 <DateTimePicker
                     onChange={(event, date) => {
-                        // console.log("dropdownDate: " + dropDownDate.chosenDate);
-                        // // console.log("Show value: " + show);
-                        // console.log("chosen date: " + date);
-                        // // set date doesn't work
                         setDropDownDate(date);
-                        // console.log("dropdownDate: " + dropDownDate.chosenDate);
                         props.setDelivery({
                             ...props.delivery,
                             delivery_date: date.toLocaleDateString('se-SV'),
                         });
                         setShow(false);
-                        // console.log("new show value: " + show);
-
                     }}
                     value={dropDownDate}
                 />
