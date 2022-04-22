@@ -65,6 +65,9 @@ const orders = {
         });
         return result;
     },
+    getOrder: async function getOrder(order_id) {
+        return 0;
+    }
 };
 
 export default orders;

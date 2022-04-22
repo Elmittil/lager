@@ -1,10 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Home from "./components/Home";
-import Pick from "./components/Pick";
-import Invoices from "./components/Invoices";
-import Deliveries from "./components/Deliveries";
+import Home from "./components/home/Home";
+import Pick from "./components/orders/Pick";
+import Invoices from "./components/invoices/Invoices";
+import Deliveries from "./components/deliveries/Deliveries";
 import { useEffect, useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
@@ -23,12 +22,12 @@ export default function App() {
     setIsLoggedIn(await authModel.loggedIn());
   }, []);
 
-  console.log("logged in: " + isLoggedIn);
-
   const routeIcons = {
     "Stock": "home",
     "Orders": "profile",
     "Deliveries": "export",
+    "Invoices": "isv",
+    "Log in": "login"
   };
   return (
     <SafeAreaView style={Base.container}>
