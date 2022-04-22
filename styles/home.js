@@ -2,6 +2,7 @@ export const base = {
   flex: 1,
   paddingLeft: 12,
   paddingRight: 12,
+  paddingTop: 12,
 };
 
 export const scrollView = {

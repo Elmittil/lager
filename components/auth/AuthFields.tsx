@@ -1,10 +1,10 @@
 import {View, Text, TextInput, Button, Pressable } from "react-native";
-import {Typography, FormStyles, Base } from '../../styles';
+import {Typography, FormStyles, HomeStyles, Base } from '../../styles';
 
 
 export default function AuthFields({ auth, setAuth, title, submit, navigation }) {
     return (
-        <View style={Base.container}>
+        <View style={[Base.container, HomeStyles.base]}>
             <Text style={Typography.header2}>{title}</Text>
 
             <Text style={Typography.label}>Email</Text>
