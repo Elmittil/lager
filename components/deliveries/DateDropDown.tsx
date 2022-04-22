@@ -1,10 +1,7 @@
 import { useState } from 'react';
 import { Platform, View, Text, Pressable } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-
-import productModel from "../models/products";
-
-import { Base, Typography } from '../styles';
+import { Base, Typography } from '../../styles';
 
 
 export default function DateDropDown(props) {

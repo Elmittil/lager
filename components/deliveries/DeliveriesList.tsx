@@ -1,9 +1,9 @@
 import { ScrollView, Text, Pressable} from 'react-native';
 import { useState, useEffect, useRef } from 'react';
 
-import deliveryModel from "../models/deliveries";
+import deliveryModel from "../../models/deliveries";
 
-import { Base, Typography, HomeStyles } from '../styles';
+import { Base, Typography, HomeStyles } from '../../styles';
 
 export default function DeliveriesList({ route, navigation }) {
     const [allDeliveries, setAllDeliveries] = useState([]);

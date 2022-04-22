@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
-import config from "./../config/config.json";
-import orderModel from "../models/orders";
-import { Base, HomeStyles, PickStyles, Typography } from '../styles';
+import config from "../../config/config.json";
+import orderModel from "../../models/orders";
+import { Base, HomeStyles, PickStyles, Typography } from '../../styles';
 import PickList from './PickList';
 
 
@@ -26,7 +26,6 @@ export default function OrderList({ route, navigation }) {
     const listOfOrders = allOrders
         .filter(order => order.status === "Ny")
         .map((order, index) => {
-            console.log("rendering list of orders");
             return <Pressable
                 
                 title={order.name}

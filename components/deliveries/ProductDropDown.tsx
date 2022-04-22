@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Picker } from '@react-native-picker/picker';
 
-import Product from '../interfaces/product';
-import productModel from "../models/products";
+import Product from '../../interfaces/product';
+import productModel from "../../models/products";
 
 
 export default function ProductDropDown(props) {

@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { ScrollView, Text, TextInput, Pressable } from 'react-native';
 
-import productModel from "../models/products";
-import deliveryModel from "../models/deliveries";
+import productModel from "../../models/products";
+import deliveryModel from "../../models/deliveries";
 
 import DateDropDown from "./DateDropDown";
 import ProductDropDown from "./ProductDropDown";
 
-import { Base, HomeStyles, Typography, FormStyles } from '../styles';
+import { Base, HomeStyles, Typography, FormStyles } from '../../styles';
 
-import config from "../config/config.json";
+import config from "../../config/config.json";
 
-import Delivery from '../interfaces/delivery';
-import Product from '../interfaces/product';
+import Delivery from '../../interfaces/delivery';
+import Product from '../../interfaces/product';
 
 
 export default function DeliveryForm({ navigation, setProducts }) {
