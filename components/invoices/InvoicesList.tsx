@@ -1,10 +1,12 @@
 import invoiceModel from "../../models/invoices";
-import { Base, Typography } from '../../styles';
 import { DataTable } from 'react-native-paper';
 import storage from "../../models/storage";
+import { useState } from 'react';
 import Invoice from "../../interfaces/invoice";
 import { useEffect } from "react";
-import { Text, Button, ScrollView } from "react-native";
+import { Text, Button, Pressable, ScrollView } from "react-native";
+import {Typography, FormStyles, HomeStyles, Base } from '../../styles';
+
 
 
 export default function InvoicesList({ route, navigation, setIsLoggedIn }) {
@@ -12,12 +14,12 @@ export default function InvoicesList({ route, navigation, setIsLoggedIn }) {
     const [allInvoices, setAllInvoices] = useState<Invoice>([]);
 
     async function reloadInvoices() {
-        setAllInvoices(await invoiceModel.getAllInvoices());
+        setAllInvoices(await invoiceModel.getInvoices());
     }
 
     if (reload) {
         reloadInvoices();
-        //set parms to false
+        route.params = false;
     }
 
     useEffect(() => {
@@ -31,37 +33,36 @@ export default function InvoicesList({ route, navigation, setIsLoggedIn }) {
 
     const invocesRows = allInvoices.map((invoice, index) => {
         return (<DataTable.Row key={index}>
-                    <DataTable.Cell>{invoice.name}</DataTable.Cell>
-                    <DataTable.Cell numeric>{invoice.total_price}</DataTable.Cell>
+                    <DataTable.Cell textStyle={ Typography.tableName }>{invoice.name}</DataTable.Cell>
+                    <DataTable.Cell numeric textStyle={ Typography.tablePrice }>{invoice.total_price}</DataTable.Cell>
                     <DataTable.Cell>{invoice.due_date}</DataTable.Cell>
                 </DataTable.Row>);
     });
 
     return (
-        <ScrollView style={Base.container}>
+        <ScrollView style={[Base.container, HomeStyles.base]}>
             <Text style={Typography.header2}>Invoices</Text> 
 
-            <DataTable>
-                <DataTable.Header>
-                    <DataTable.Title>Namn</DataTable.Title>
-                    <DataTable.Title numeric>Pris</DataTable.Title>
+            <DataTable style={{ padding: 0 }}>
+                <DataTable.Header >
+                    <DataTable.Title>Name</DataTable.Title>
+                    <DataTable.Title numeric textStyle={ Typography.tablePrice }>Price</DataTable.Title>
                     <DataTable.Title numeric>Expiry date</DataTable.Title>
                 </DataTable.Header>
                 {invocesRows}
             </DataTable>
 
-            <Button 
-                title="New invoice"
-                onPress={() => {
+            <Pressable style={Base.button} onPress={() => {
                     navigation.navigate('Invoices Form');
-                }}
-            />
-            <Button 
-                title="Log out"
-                onPress={async () => {
+                }}>
+                <Text style={Typography.buttonText}>New invoice</Text>
+            </Pressable> 
+
+            <Pressable style={Base.button} onPress={async () => {
                     await logOut();
-                }}
-            />
+                }}>
+                <Text style={Typography.buttonText}>Log out</Text>
+            </Pressable> 
 
         </ScrollView>
     );

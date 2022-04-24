@@ -36,8 +36,16 @@ const orders = {
 
     updateOrder: async function updateOrder(order: Partial<Order>) {
         try {
+            // console.log("updateOrder() oder sent in");
+            // console.log(order);
+            let updatedOrder = {
+                id: order.id,
+                name: order.name,
+                api_key: config.api_key,
+                status_id: order.status_id,
+            };
             await fetch(`${config.base_url}/orders`, {
-                body: JSON.stringify(order),
+                body: JSON.stringify(updatedOrder),
                 headers: {
                     'content-type': 'application/json'
                 },
@@ -54,10 +62,10 @@ const orders = {
     },
     checkProductsAvailability: function checkProductsAvailability(order: Partial<Order>) {
         let result = true;
-        if (order.order_items.length == 0){
+        if (order.order_items?.length == 0){
             result =  false;
         }
-        order.order_items.forEach(item => {
+        order.order_items?.forEach(item => {
             if (item.amount > item.stock) {
                 result =  false;
                 return;
@@ -65,8 +73,10 @@ const orders = {
         });
         return result;
     },
-    getOrder: async function getOrder(order_id) {
-        return 0;
+    getOrder: async function getOrder(order_id: number) {
+        const response = await fetch(`${config.base_url}/orders/${order_id}?api_key=${config.api_key}`);
+        const result = await response.json();
+        return result.data;
     }
 };
 

@@ -1,43 +1,55 @@
 import { useEffect, useState } from 'react';
-import {Platform, ScrollView, Text, TextInput, Button } from "react-native";
-import { Picker } from '@react-native-picker/picker';
-import DateTimePicker from '@react-native-community/datetimepicker'
+import { ScrollView, Text, Pressable } from "react-native";
+import { Base, Typography, HomeStyles } from '../../styles';
 
-import invoicesModel from "../../models/invoices";
-import ordersModel from "../../models/orders";
+import invoiceModel from "../../models/invoices";
 import DateDropDown from "./DateDropDown";
+import OrderDropDown from "./OrderDropDown";
+import { Picker } from '@react-native-picker/picker';
+
+import Order from '../../interfaces/order';
+import ordersModel from "../../models/orders";
 
 import Invoice from '../../interfaces/invoice';
-import Order from '../../interfaces/order';
+import { Platform, View } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
-function OrderDropDown(props) {
-    const [orders, setOrders] = useState<Order[]>([]);
 
-    useEffect(async () => {
-        setOrders(await ordersModel.getOrders());
-    }, []);
-
-    const ordersList = orders.filter(order => order.status)
-    .map((order, index) => {
-        return <Picker.Item key={index} label={order.name} value={order.id} />;
-    });
-
-    return (
-        <Picker
-            selectedValue={props.invoice?.order_id}
-            onValueChange={(itemValue) =>{
-                props.setInvoice({...props.invoice, order_id:itemValue});
-            }}>
-                {ordersList}
-            </Picker>
-    );
-}
 
 export default function InvoicesForm({ navigation}) {
     const [invoice, setInvoice] = useState<Partial<Invoice>>({});
 
-    async function createInvoce() {
-        
+    async function createInvoice() {
+        try {
+            await invoiceModel.createInvoice(invoice);
+        } catch (error) {
+            console.log(error)
+        }
+
+        setInvoice(invoice);
+    
+        navigation.navigate("Invoices list", { reload: true });
     }
 
+    return (
+        <ScrollView style={{ ...HomeStyles.base, ...Base.container }}>
+            <Text style={{ ...Typography.header2 }}>New invoice</Text>
+
+            <Text style={{ ...Typography.label }}>Order</Text>
+            <OrderDropDown
+                invoice={invoice}
+                setInvoice={setInvoice}
+            />
+
+            <Text style={{ ...Typography.label }}>Invoice date</Text>
+            <DateDropDown
+                invoice={invoice}
+                setInvoice={setInvoice}
+            />
+                
+            <Pressable style={Base.button} onPress={createInvoice}>
+                <Text style={Typography.buttonText}>Create invoice</Text>
+            </Pressable>       
+        </ScrollView>
+    );
 };
