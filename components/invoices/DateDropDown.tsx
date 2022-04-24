@@ -23,6 +23,7 @@ export default function DateDropDown(props) {
     
         return `${date.getFullYear()}-${zeroPad(date.getMonth()+1)}-${zeroPad(date.getDate())}`;
     }
+    
     return (
         <View>
             {Platform.OS === "android" && (

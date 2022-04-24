@@ -1,5 +1,4 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import DeliveriesList from './DeliveriesList';
 import DeliveryForm from './DeliveryForm';
 

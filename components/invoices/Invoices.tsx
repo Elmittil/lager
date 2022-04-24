@@ -1,7 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Stack } from '@react-navigation/native-stack';
 import InvoicesList from './InvoicesList';
 import InvoicesForm from './InvoicesForm';
+
+const Stack = createNativeStackNavigator();
 
 // export default function Pick(route, products, setProducts) {
 export default function Invoices(props) {

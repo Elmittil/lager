@@ -30,19 +30,18 @@ export default function AuthFields({ auth, setAuth, title, submit, navigation })
                 autoCapitalize = "none"
                 autoCorrect = {false}
             />
-            <Button
-                title={title}
-                onPress={()=> {
+            <Pressable style={Base.button} onPress={()=> {
                     submit();
-                }}
-            />
+                }}>
+                <Text style={Typography.buttonText}>{title}</Text>
+            </Pressable> 
+
             {title === "Log in" &&
-                <Button
-                    title="Register"
-                    onPress={() => {
-                        navigation.navigate("Register");
-                    }}
-                />
+                <Pressable style={Base.button} onPress={() => {
+                            navigation.navigate("Register");
+                        }}>
+                    <Text style={Typography.buttonText}>Register</Text>
+                </Pressable> 
             }   
         </View>
     );
