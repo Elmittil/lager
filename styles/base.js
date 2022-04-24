@@ -16,6 +16,6 @@ export const button = {
     elevation: 3,
     backgroundColor: 'green',
     color: 'white',
-    marginHorizontal: '10%',
-    marginVertical: 20,
+    marginHorizontal: '5%',
+    marginTop: 20,
 };

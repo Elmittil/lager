@@ -27,7 +27,6 @@ export const normal = {
 export const list = {
     fontSize: 18,
     marginBottom: 14,
-    textDecorationLine: 'underline', 
 };
 
 export const listFine = {
@@ -45,9 +44,16 @@ export const spaceTop = {
 
 export const buttonText = {
     color: 'white',
-    fontSize: 24,
+    fontSize: 20,
 };
 
 export const warning = {
     color: 'red',
+};
+
+export const tablePrice = {
+    paddingRight: 20,
+};
+export const tableName = {
+    width: 200,
 };

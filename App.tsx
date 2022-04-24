@@ -1,4 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
+import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Home from "./components/home/Home";
 import Pick from "./components/orders/Pick";
