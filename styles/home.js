@@ -1,7 +1,7 @@
 export const base = {
   flex: 1,
-  paddingLeft: 12,
-  paddingRight: 12,
+  paddingLeft: 20,
+  paddingRight: 20,
   paddingTop: 12,
 };
 
@@ -14,6 +14,7 @@ export const scrollView = {
 export const titleOverlay = {
   position: 'absolute',
   top: 40,
+  left: "10%",
 };
 
 export const image = {

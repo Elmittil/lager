@@ -1,7 +1,7 @@
 
 import { useEffect} from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { Base, HomeStyles, Typography } from '../../styles';
+import { Text, View } from 'react-native';
+import { Typography } from '../../styles';
 import productModel from "../../models/products";
 
 
@@ -32,7 +32,7 @@ function StockList({products, setProducts}) {
 export default function Stock({products, setProducts}) {
   return (
     <View>
-      <Text style={Typography.header3}>Lagerförteckning</Text>
+      <Text style={Typography.header2}>Inventory</Text>
       <StockList products={products} setProducts={setProducts}/>
     </View>
   );

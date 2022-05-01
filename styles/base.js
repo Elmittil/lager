@@ -4,7 +4,7 @@ export const titleTextColour = {
 
 export const container = {
     flex: 1,
-    backgroundColor: '#e9f5db',
+    backgroundColor: '#dde7c7',
 };
 
 export const button = {
@@ -18,4 +18,15 @@ export const button = {
     color: 'white',
     marginHorizontal: '5%',
     marginTop: 20,
+    marginBottom: 10,
+};
+
+export const bottomNavBar = {
+    backgroundColor: '#006400',
+    height: 65,
+    paddingTop: 8, 
+};
+
+export const topNavBar = {
+    backgroundColor: '#006400',
 };

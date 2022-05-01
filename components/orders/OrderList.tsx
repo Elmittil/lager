@@ -43,7 +43,7 @@ export default function OrderList({ route, navigation }) {
     return (
         <SafeAreaView style={[Base.container, HomeStyles.base]}>
             <View>
-                <Text style={[Typography.header3, Typography.spaceTop, Typography.center]}>
+                <Text style={[Typography.header3, Typography.spaceTop]}>
                     Orders to be collected
                 </Text>
                 {listOfOrders}

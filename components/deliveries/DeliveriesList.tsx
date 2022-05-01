@@ -42,7 +42,7 @@ export default function DeliveriesList({ route, navigation }) {
     
 return (
         <ScrollView style={[Base.container, HomeStyles.base]}>
-            <Text style={[Typography.header3, Typography.center]}>Deliveries</Text>
+            <Text style={[Typography.header3, Typography.spaceTop]}>Deliveries</Text>
             {listOfDeliveries}
             <Pressable style={Base.button} onPress={() => {
                     navigation.navigate('Form');

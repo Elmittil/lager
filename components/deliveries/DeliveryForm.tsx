@@ -37,8 +37,8 @@ export default function DeliveryForm({ navigation, setProducts }) {
     }    
 
     return (
-        <ScrollView style={{ ...HomeStyles.base }}>
-            <Text style={{ ...Typography.header2 }}>New delivery</Text>
+        <ScrollView style={{ ...HomeStyles.base, ...Base.container }}>
+            <Text style={[Typography.header3, Typography.spaceTop]}>New delivery</Text>
 
             <Text style={{ ...Typography.label }}>Product</Text>
             <ProductDropDown
