@@ -4,15 +4,13 @@ import { Base, Typography, HomeStyles } from '../../styles';
 
 import invoiceModel from "../../models/invoices";
 import DateDropDown from "./DateDropDown";
-import OrderDropDown from "./OrderDropDown";
+import OrderDropDown from "../OrderDropDown";
 import { Picker } from '@react-native-picker/picker';
 
 import Order from '../../interfaces/order';
 import ordersModel from "../../models/orders";
 
 import Invoice from '../../interfaces/invoice';
-import { Platform, View } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 
@@ -31,6 +29,14 @@ export default function InvoicesForm({ navigation}) {
         navigation.navigate("Invoices list", { reload: true });
     }
 
+    async function processSelectedOrder(orderId) {
+            setInvoice({...invoice, order_id: orderId});
+    }
+
+    function ordersFilter(status_id) {
+        return status_id < 600;
+    }
+
     return (
         <ScrollView style={{ ...HomeStyles.base, ...Base.container }}>
             <Text style={{ ...Typography.header2 }}>New invoice</Text>
@@ -39,6 +45,8 @@ export default function InvoicesForm({ navigation}) {
             <OrderDropDown
                 invoice={invoice}
                 setInvoice={setInvoice}
+                processSelectedOrder={processSelectedOrder}
+                ordersFilter={ordersFilter}
             />
 
             <Text style={{ ...Typography.label }}>Invoice date</Text>
