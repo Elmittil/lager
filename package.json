@@ -37,6 +37,7 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
+    "react-native-flash-message": "^0.2.1",
     "react-native-global-font": "^1.0.3",
     "react-native-maps": "0.29.4",
     "react-native-paper": "^4.12.1",
@@ -48,6 +49,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@testing-library/react-native": "^9.1.0",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.64.12",
     "@types/react-native-popup-dialog": "^0.16.4",

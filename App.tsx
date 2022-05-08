@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-
+import FlashMessage from 'react-native-flash-message';
 
 import Home from "./components/home/Home";
 import Pick from "./components/orders/Pick";
 import Ship from "./components/shipping/Ship";
 import Invoices from "./components/invoices/Invoices";
-import Deliveries from "./components/deliveries/Deliveries";
+import DeliveriesGroup from "./components/deliveries/DeliveriesGroup";
 import Auth from "./components/auth/Auth";
 
 import AppLoading from 'expo-app-loading';
@@ -71,7 +71,7 @@ export default function App() {
                         </Tab.Screen>
 
                         <Tab.Screen name="Deliveries">
-                            {() => <Deliveries setProducts={setProducts} />}
+                            {() => <DeliveriesGroup setProducts={setProducts} />}
                         </Tab.Screen>
 
                         <Tab.Screen name="Ship" component={Ship} />
@@ -89,6 +89,7 @@ export default function App() {
                     </Tab.Navigator>
                 </NavigationContainer>
                 <StatusBar style="auto" />
+                <FlashMessage position="top"/>
             </SafeAreaView>
         );
     }

@@ -13,18 +13,27 @@ const deliveries = {
             api_key: config.api_key,
         };
         try {
-            await fetch(`${config.base_url}/deliveries`, {
+            const response = await fetch(`${config.base_url}/deliveries`, {
                 body: JSON.stringify(delivery),
                 headers: {
                     'content-type': 'application/json'
                 },
                 method: 'POST'
             });
+
+            const result =  await response.json();
+
+            return {
+                message: "Delivery added successfully",
+                description: result.data.message,
+                type: "success"
+            };
         } catch (error) {
             console.error("could not update product " + error);
             return {
-                error: error.message,
-                status: error.status,
+                message: error.title,
+                description: error.detail,
+                type: "danger"
             }
         }
     },
@@ -32,6 +41,8 @@ const deliveries = {
     getDeliveries: async function getDeliveries(): Promise<Delivery[]> {
         const response = await fetch(`${config.base_url}/deliveries?api_key=${config.api_key}`);
         const result = await response.json();
+        // console.log('result data');
+        // console.log(result.data);
         return result.data;
     },
 };

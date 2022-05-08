@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ScrollView, Text, TextInput, Pressable } from 'react-native';
+import { showMessage } from 'react-native-flash-message';
 
 import productModel from "../../models/products";
 import deliveryModel from "../../models/deliveries";
@@ -21,7 +22,8 @@ export default function DeliveryForm({ navigation, setProducts }) {
 
     async function addDelivery() {
         // skicka delivery till delivery model
-        await deliveryModel.addDelivery(delivery);
+        const result = await deliveryModel.addDelivery(delivery);
+        
                 // öka antalet produkter i lagret för vald product
         const updatedProduct = {
             ...currentProduct,
@@ -32,9 +34,21 @@ export default function DeliveryForm({ navigation, setProducts }) {
     
         setProducts(await productModel.getProducts());
         // setAllDelveries(await deliveryModel.getDeliveries());
-    
-        navigation.navigate("List", { reload: true });
+        if (result.type === "success") {
+            navigation.navigate("List", { reload: true });  
+        }
+        showMessage(result);
     }    
+
+    function validateAmount(text: string) {
+         if (/[a-zA-Z]/.test(text)){
+            showMessage({
+                message: "Amount not digits error",
+                description: "Amount should contan only digits",
+                type: "warning"
+            });
+         }
+    }
 
     return (
         <ScrollView style={{ ...HomeStyles.base, ...Base.container }}>
@@ -52,6 +66,7 @@ export default function DeliveryForm({ navigation, setProducts }) {
             <TextInput
                     style={ FormStyles.input }
                     onChangeText={(content: string) => {
+                        validateAmount(content);
                         setDelivery({ ...delivery, amount: parseInt(content)});
                     }}
                     value={delivery?.amount?.toString()}
